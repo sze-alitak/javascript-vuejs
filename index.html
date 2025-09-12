@@ -5,35 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VueJS</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-    <style>
-        .text-red {
-            color: red;
-        }
-        .text-green {
-            color: green;
-        }
-    </style>
-
-
 </head>
 <body>
 
-
     <div id="app">
-        <button :class="active ? 'text-red' : 'text-green'" v-on:click="toggle">Click</button>
+        <button v-on:click="decrement">-</button>
+        <p>{{ counter }}</p>
+        <button v-on:click="increment">+</button>
+        <p v-if="counter < 0">
+            negatív szám
+        </p>
+        <p v-else-if="counter < 5">
+            túl kicsi szám
+        </p>
+        <p v-else>
+            hurrá!!
+        </p>
+        <p v-show="counter < 0">
+            negatív szám
+        </p>
+        <p v-show="counter >= 0 && counter < 5">
+            túl kicsi szám
+        </p>
+        <p v-show="counter >= 5">
+            hurrá!!
+        </p>
     </div>
 
     <script>
         Vue.createApp({
             data() {
                 return {
-                    active: false
+                    counter: 0
                 }
             },
             methods: {
-                toggle() {
-                    this.active = ! this.active
+                increment() {
+                    this.counter++
+                },
+                decrement() {
+                    this.counter--
                 }
             }
         }).mount("#app")

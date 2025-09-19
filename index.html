@@ -9,42 +9,37 @@
 <body>
 
     <div id="app">
-        <button v-on:click="decrement">-</button>
-        <p>{{ counter }}</p>
-        <button v-on:click="increment">+</button>
-        <p v-if="counter < 0">
-            negatív szám
-        </p>
-        <p v-else-if="counter < 5">
-            túl kicsi szám
-        </p>
-        <p v-else>
-            hurrá!!
-        </p>
-        <p v-show="counter < 0">
-            negatív szám
-        </p>
-        <p v-show="counter >= 0 && counter < 5">
-            túl kicsi szám
-        </p>
-        <p v-show="counter >= 5">
-            hurrá!!
-        </p>
+        <ol>
+            <li v-for="book in books">{{ book.author }} - {{ book.title }}</li>
+        </ol>
     </div>
 
     <script>
         Vue.createApp({
             data() {
                 return {
-                    counter: 0
-                }
-            },
-            methods: {
-                increment() {
-                    this.counter++
-                },
-                decrement() {
-                    this.counter--
+                    books: [
+                         {
+                            "author": "Isaac Asimov",
+                            "title": "Foundation",
+                        },
+                        {
+                            "author": "Isaac Asimov",
+                            "title": "Foundation and Empire",
+                        },
+                        {
+                            "author": "Andrzej Sapkowski",
+                            "title": "Witcher",
+                        },
+                        {
+                            "author": "Andrzej Sapkowski",
+                            "title": "Witcher 2",
+                        },
+                        {
+                            "author": "Andrzej Sapkowski",
+                            "title": "Witcher 3",
+                        },
+                    ]
                 }
             }
         }).mount("#app")

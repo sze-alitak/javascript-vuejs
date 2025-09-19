@@ -1,45 +1,39 @@
-<script>
-export default {
-  data() {
-    return {
-        books: [
-              {
-                "id": 1,
-                "title": "Foundation",
-                'is_completed': false,
-            },
-            {
-                "id": 2,
-                "title": "Foundation and Empire",
-                'is_completed': false,
-            },
-            {
-                "id": 3,
-                "title": "Witcher",
-                'is_completed': false,
-            },
-            {
-                "id": 4,
-                "title": "Witcher 2",
-                'is_completed': false,
-            },
-            {
-                "id": 5,
-                "title": "Witcher 3",
-                'is_completed': false,
-            },
-        ]
-    }
-  },
-  computed: {
-      incompleteBooks() {
-          return this.books.filter(book => !book.is_completed);
-      },
-      completeBooks() {
-          return this.books.filter(book => book.is_completed);
-      },
-  }
+<script setup>
+import { ref, computed } from 'vue'
+
+const books = ref([
+    {
+        "id": 1,
+        "title": "Foundation",
+        'is_completed': false,
+    },
+    {
+        "id": 2,
+        "title": "Foundation and Empire",
+        'is_completed': false,
+    },
+    {
+        "id": 3,
+        "title": "Witcher",
+        'is_completed': false,
+    },
+    {
+        "id": 4,
+        "title": "Witcher 2",
+        'is_completed': false,
+    },
+    {
+        "id": 5,
+        "title": "Witcher 3",
+        'is_completed': false,
+    },
+])
+
+const foo = () => {
+    console.log("bar")
 }
+const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
+const completeBooks = computed(() => books.value.filter(book => book.is_completed))
 </script>
 
 <template>

@@ -10,17 +10,17 @@
 <body class="h-full grid place-items-center">
 
     <div id="app">
-        <h2 v-if="books.filter(book => !book.is_completed).length">Könyvek:</h2>
+        <h2 v-if="incompleteBooks.length">Könyvek:</h2>
         <ul>
-            <li v-for="book in books.filter(book => !book.is_completed)" :key="`book-${book.id}`">
+            <li v-for="book in incompleteBooks" :key="`book-${book.id}`">
                 <input type="checkbox" v-model="book.is_completed">
                 <span>{{ book.author }} {{ book.title }}</span>
             </li>
         </ul>
 
-        <h2 class="mt-3" v-if="books.filter(book => book.is_completed).length">Elolvasott könyvek:</h2>
+        <h2 class="mt-3" v-if="completeBooks.length">Elolvasott könyvek:</h2>
         <ul>
-            <li v-for="book in books.filter(book => book.is_completed)" :key="`book-${book.id}`">
+            <li v-for="book in completeBooks" :key="`book-${book.id}`">
                 <input type="checkbox" v-model="book.is_completed">
                 <span>{{ book.author }} {{ book.title }}</span>
             </li> 
@@ -61,6 +61,14 @@
                         },
                     ]
                 }
+            },
+            computed: {
+                incompleteBooks() {
+                    return this.books.filter(book => !book.is_completed);
+                },
+                completeBooks() {
+                    return this.books.filter(book => book.is_completed);
+                },
             }
         }).mount("#app")
     </script>

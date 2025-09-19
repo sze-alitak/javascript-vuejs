@@ -11,8 +11,8 @@ export default {
 </script>
 
 <template>
-  <CustomButton></CustomButton>
-  <CustomButton></CustomButton>
+  <CustomButton>Foo</CustomButton>
+  <CustomButton>New</CustomButton>
 
   <Book></Book>
 </template>

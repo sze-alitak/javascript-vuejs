@@ -6,6 +6,9 @@
 ## Félévek
 * [2025 ősz](https://github.com/sze-alitak/javascript-vuejs/tree/2025)
 
+## Tematika
+[GK*B_INTM130 Tematika](https://docs.google.com/document/d/1sw4KJwG_QjRVdu7TZlXo3xFMSrdH-kZODr1-mPs4fcE/edit?usp=sharing)
+
 ## Mintafeladatok vizsgához
 
 ## Általános prezentáció

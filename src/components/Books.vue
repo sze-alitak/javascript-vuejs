@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import TextInput from './TextInput.vue'
+import Counter from './Counter.vue'
 
 const books = ref([
     {
@@ -30,6 +31,7 @@ const books = ref([
     },
 ])
 
+const count = ref(0)
 const newBookTitle = ref('foo bar')
 
 function add() {
@@ -47,6 +49,10 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 </script>
 
 <template>
+    <Counter v-model="count"/>
+    <div>
+        A számláló értéke {{ count }}
+    </div>
     <form class="grid grid-cols-1 mb-3" v-on:submit.prevent="add">
         <TextInput v-model="newBookTitle" />
         <button

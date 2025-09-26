@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import TextInput from './TextInput.vue'
 
 const books = ref([
     {
@@ -29,10 +30,7 @@ const books = ref([
     },
 ])
 
-let newBookTitle = ref('')
-
-const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
-const completeBooks = computed(() => books.value.filter(book => book.is_completed))
+const newBookTitle = ref('foo bar')
 
 function add() {
     books.value.push({
@@ -43,14 +41,14 @@ function add() {
     newBookTitle.value = ''
 }
 
+const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
+const completeBooks = computed(() => books.value.filter(book => book.is_completed))
+
 </script>
 
 <template>
     <form class="grid grid-cols-1 mb-3" v-on:submit.prevent="add">
-        <input
-         class="border-1 border-gray-300 rounded mt-2 p-1 focus:bg-gray-200"
-         v-model="newBookTitle"
-         type="text"/>
+        <TextInput v-model="newBookTitle" />
         <button
          class="border-1 border-gray-300 rounded bg-gray-300 mt-2 p-1 w-1/2 hover:bg-gray-400 cursor-pointer"
          type="submit">

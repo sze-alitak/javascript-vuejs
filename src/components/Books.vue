@@ -66,7 +66,8 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 
     <h2 v-if="incompleteBooks.length" class="font-bold text-lg">Könyvek:</h2>
     <BookTags
-     :tags="books.map(book => book.tag)"
+     :initialTags="books.map(book => book.tag)"
+     :activeTag="activeTag"
      v-on:tag-selected="activeTag = $event"
      />
     <ul>

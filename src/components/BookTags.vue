@@ -3,15 +3,15 @@ import { computed } from 'vue'
 
 const props = defineProps({
     initialTags: Array,
-    activeTag: String,
+    modelValue: String,
 })
 
-const emit = defineEmits(['tag-selected'])
+const emit = defineEmits(['update:modelValue'])
 
 const tags = computed(() => ["all", ...new Set(props.initialTags)])
 
 const selectTag = (tag) => {
-    emit('tag-selected', tag)
+    emit('update:modelValue', tag)
 }
 </script>
 
@@ -20,7 +20,7 @@ const selectTag = (tag) => {
         <button 
         v-for="tag in tags" 
         class="border-1 p-1 hover:bg-gray-400 cursor-pointer"
-        :class="{'bg-gray-200': props.activeTag === tag}"
+        :class="{'bg-gray-200': props.modelValue === tag}"
         :key="`tag-${tag}`"
         type="button"
         v-on:click="selectTag(tag)"

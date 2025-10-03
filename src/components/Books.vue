@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import TextInput from './TextInput.vue'
 import BookTags from './BookTags.vue'
+import BookCreate from './BookCreate.vue'
 
 const books = ref([
     {
@@ -37,16 +37,13 @@ const books = ref([
 ])
 const activeTag = ref('all')
 
-const newBookTitle = ref('')
-
-function add() {
+function add(title) {
     books.value.push({
         "id": books.value.length + 1,
-        "title": newBookTitle.value,
+        "title": title,
         "is_completed": false,
         "tag": "scifi",
     })
-    newBookTitle.value = ''
 }
 
 const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
@@ -54,15 +51,7 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 </script>
 
 <template>
-    <h2 class="font-bold text-lg">Könyv hozzáadása</h2>
-    <form class="flex mb-3" v-on:submit.prevent="add">
-        <TextInput v-model="newBookTitle" />
-        <button
-         class="border-1 p-1 w-1/2 hover:bg-gray-200 cursor-pointer"
-         type="submit">
-            Hozzáadás
-        </button>
-    </form>
+    <BookCreate v-on:add="add"/>
 
     <h2 v-if="incompleteBooks.length" class="font-bold text-lg">Könyvek:</h2>
     <BookTags

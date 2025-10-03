@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import TextInput from './TextInput.vue'
+import BookTags from './BookTags.vue'
 
 const books = ref([
     {
@@ -36,14 +37,6 @@ const books = ref([
 ])
 const activeTag = ref('all')
 
-// const tags = ref([
-//     'scifi',
-//     'fantasy',
-//     'horror',
-//     'romance',
-//     'thriller',
-// ])
-
 const newBookTitle = ref('')
 
 function add() {
@@ -58,9 +51,6 @@ function add() {
 
 const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
 const completeBooks = computed(() => books.value.filter(book => book.is_completed))
-
-const tags = computed(() => ["all", ...new Set(books.value.map(book => book.tag))])
-
 </script>
 
 <template>
@@ -70,23 +60,15 @@ const tags = computed(() => ["all", ...new Set(books.value.map(book => book.tag)
         <button
          class="border-1 p-1 w-1/2 hover:bg-gray-200 cursor-pointer"
          type="submit">
-         Hozzáadás
+            Hozzáadás
         </button>
     </form>
 
     <h2 v-if="incompleteBooks.length" class="font-bold text-lg">Könyvek:</h2>
-    <div class="flex gap-2 mb-2">
-        <button 
-        v-for="tag in tags" 
-        class="border-1 p-1 hover:bg-gray-400 cursor-pointer"
-        :class="{'bg-gray-200': activeTag === tag}"
-        :key="`tag-${tag}`"
-        type="button"
-        v-on:click="activeTag = tag"
-        >
-        {{ tag }}
-    </button>
-    </div>
+    <BookTags
+     :tags="books.map(book => book.tag)"
+     v-on:tag-selected="activeTag = $event"
+     />
     <ul>
         <li v-for="book in incompleteBooks.filter(book => activeTag === 'all' || book.tag === activeTag)" :key="`book-${book.id}`" class="flex items-center justify-between">
             <span>{{ book.title }}</span>

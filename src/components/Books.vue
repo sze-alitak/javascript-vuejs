@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import TextInput from './TextInput.vue'
-import Counter from './Counter.vue'
 
 const books = ref([
     {
@@ -31,8 +30,7 @@ const books = ref([
     },
 ])
 
-const count = ref(0)
-const newBookTitle = ref('foo bar')
+const newBookTitle = ref('')
 
 function add() {
     books.value.push({
@@ -49,33 +47,30 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 </script>
 
 <template>
-    <Counter v-model="count"/>
-    <div>
-        A számláló értéke {{ count }}
-    </div>
-    <form class="grid grid-cols-1 mb-3" v-on:submit.prevent="add">
+    <h2 class="font-bold text-lg">Könyv hozzáadása</h2>
+    <form class="flex mb-3" v-on:submit.prevent="add">
         <TextInput v-model="newBookTitle" />
         <button
-         class="border-1 border-gray-300 rounded bg-gray-300 mt-2 p-1 w-1/2 hover:bg-gray-400 cursor-pointer"
+         class="border-1 p-1 w-1/2 hover:bg-gray-200 cursor-pointer"
          type="submit">
          Hozzáadás
         </button>
     </form>
 
 
-    <h2 v-if="incompleteBooks.length">Könyvek:</h2>
+    <h2 v-if="incompleteBooks.length" class="font-bold text-lg">Könyvek:</h2>
     <ul>
-        <li v-for="book in incompleteBooks" :key="`book-${book.id}`">
-        <input type="checkbox" v-model="book.is_completed">
-        <span>{{ book.title }}</span>
+        <li v-for="book in incompleteBooks" :key="`book-${book.id}`" class="flex items-center justify-between">
+            <span>{{ book.title }}</span>
+            <input type="checkbox" v-model="book.is_completed">
         </li>
     </ul>
 
-    <h2 class="mt-3" v-if="completeBooks.length">Elolvasott könyvek:</h2>
+    <h2 class="mt-3 font-bold text-lg" v-if="completeBooks.length">Elolvasott könyvek:</h2>
     <ul>
-        <li v-for="book in completeBooks" :key="`book-${book.id}`">
-            <input type="checkbox" v-model="book.is_completed">
+        <li v-for="book in completeBooks" :key="`book-${book.id}`" class="flex items-center justify-between">
             <span>{{ book.title }}</span>
+            <input type="checkbox" v-model="book.is_completed">
         </li> 
     </ul>
 </template>

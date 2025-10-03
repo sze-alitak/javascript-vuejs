@@ -4,7 +4,7 @@ const modelValue = defineModel()
 
 <template>
     <input
-        class="border-1 border-gray-300 rounded mt-2 p-1 focus:bg-gray-200"
+        class="border-1 border-gray-300 p-1 focus:bg-gray-200"
         v-model="modelValue"
         type="text"/>
 </template>

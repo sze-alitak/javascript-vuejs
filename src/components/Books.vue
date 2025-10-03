@@ -6,29 +6,43 @@ const books = ref([
     {
         "id": 1,
         "title": "Foundation",
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "scifi",
     },
     {
         "id": 2,
         "title": "Foundation and Empire",
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "scifi",
     },
     {
         "id": 3,
         "title": "Witcher",
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "fantasy",
     },
     {
         "id": 4,
         "title": "Witcher 2",
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "fantasy",
     },
     {
         "id": 5,
         "title": "Witcher 3",
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "fantasy",
     },
 ])
+const activeTag = ref('all')
+
+// const tags = ref([
+//     'scifi',
+//     'fantasy',
+//     'horror',
+//     'romance',
+//     'thriller',
+// ])
 
 const newBookTitle = ref('')
 
@@ -36,13 +50,16 @@ function add() {
     books.value.push({
         "id": books.value.length + 1,
         "title": newBookTitle.value,
-        'is_completed': false,
+        "is_completed": false,
+        "tag": "scifi",
     })
     newBookTitle.value = ''
 }
 
 const incompleteBooks = computed(() => books.value.filter(book => !book.is_completed))
 const completeBooks = computed(() => books.value.filter(book => book.is_completed))
+
+const tags = computed(() => ["all", ...new Set(books.value.map(book => book.tag))])
 
 </script>
 
@@ -57,10 +74,21 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
         </button>
     </form>
 
-
     <h2 v-if="incompleteBooks.length" class="font-bold text-lg">Könyvek:</h2>
+    <div class="flex gap-2 mb-2">
+        <button 
+        v-for="tag in tags" 
+        class="border-1 p-1 hover:bg-gray-400 cursor-pointer"
+        :class="{'bg-gray-200': activeTag === tag}"
+        :key="`tag-${tag}`"
+        type="button"
+        v-on:click="activeTag = tag"
+        >
+        {{ tag }}
+    </button>
+    </div>
     <ul>
-        <li v-for="book in incompleteBooks" :key="`book-${book.id}`" class="flex items-center justify-between">
+        <li v-for="book in incompleteBooks.filter(book => activeTag === 'all' || book.tag === activeTag)" :key="`book-${book.id}`" class="flex items-center justify-between">
             <span>{{ book.title }}</span>
             <input type="checkbox" v-model="book.is_completed">
         </li>

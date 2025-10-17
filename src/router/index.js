@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('@/views/BooksView.vue')
     },
     {
+      path: '/books/:id/edit',
+      name: 'books.edit',
+      component: () => import('@/views/BooksEditView.vue')
+    },
+    {
       path: '/todo',
       name: 'todo',
       component: () => import('@/views/TodoView.vue')

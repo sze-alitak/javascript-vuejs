@@ -34,6 +34,6 @@ const completeTodos = computed(() => todos.value.filter(todo => todo.is_complete
 <template>
     <CreateSimple title="Todo hozzáadása" v-on:add="add"/>
 
-    <List title="Todos" :data="incompleteTodos" v-if="incompleteTodos.length" />
-    <List title="Elolvasott todo" :data="completeTodos" v-if="completeTodos.length" />
+    <List title="Todos" route-prefix="todo" :data="incompleteTodos" v-if="incompleteTodos.length" />
+    <List title="Elolvasott todo" route-prefix="todo" :data="completeTodos" v-if="completeTodos.length" />
 </template>

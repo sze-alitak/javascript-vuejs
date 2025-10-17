@@ -52,6 +52,9 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 <template>
     <CreateSimple title="Könyv hozzáadása" v-on:add="add"/>
 
-    <List title="Könyvek" :data="incompleteBooks" v-if="incompleteBooks.length" />
-    <List title="Elolvasott könyvek" :data="completeBooks" v-if="completeBooks.length" />
+    <!-- named route -->
+    <!-- <RouterLink :to="{ name: 'books.edit', params: { id: 1 } }">Edit</RouterLink> -->
+
+    <List title="Könyvek" route-prefix="books" :data="incompleteBooks" v-if="incompleteBooks.length" />
+    <List title="Elolvasott könyvek" route-prefix="books" :data="completeBooks" v-if="completeBooks.length" />
 </template>

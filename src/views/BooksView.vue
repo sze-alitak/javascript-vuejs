@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import BookCreate from '@/components/books/BookCreate.vue'
-import BooksList from '@/components/books/BooksList.vue'
+import CreateSimple from '@/components/CreateSimple.vue'
+import List from '@/components/List.vue'
 
 const books = ref([
     {
@@ -50,8 +50,8 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 </script>
 
 <template>
-    <BookCreate v-on:add="add"/>
+    <CreateSimple title="Könyv hozzáadása" v-on:add="add"/>
 
-    <BooksList title="Könyvek" :books="incompleteBooks" v-if="incompleteBooks.length" />
-    <BooksList title="Elolvasott könyvek" :books="completeBooks" v-if="completeBooks.length" />
+    <List title="Könyvek" :data="incompleteBooks" v-if="incompleteBooks.length" />
+    <List title="Elolvasott könyvek" :data="completeBooks" v-if="completeBooks.length" />
 </template>

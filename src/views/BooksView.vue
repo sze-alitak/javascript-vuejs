@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import BookCreate from './BookCreate.vue'
-import BooksList from './BooksList.vue'
+import BookCreate from '@/components/books/BookCreate.vue'
+import BooksList from '@/components/books/BooksList.vue'
 
 const books = ref([
     {

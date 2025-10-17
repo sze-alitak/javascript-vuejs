@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import BookTags from './BookTags.vue'
+import BookTags from '@/components/books/BookTags.vue'
 
 const props = defineProps({
     title: String,

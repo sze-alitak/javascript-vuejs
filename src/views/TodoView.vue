@@ -2,12 +2,12 @@
 import { ref, computed, onMounted } from 'vue'
 import CreateSimple from '@/components/CreateSimple.vue'
 import List from '@/components/List.vue'
-import axios from 'axios'
+import axios from '@/services/http'
 
 const todos = ref([])
 
 const fetchTodos = () => {
-    axios.get('http://95.138.193.252:32028/todo/')
+    axios.get('/todo/')
     .then(res => {
             todos.value = res.data
     })
@@ -17,7 +17,7 @@ const fetchTodos = () => {
 }
 
 function add(title) {
-    axios.post('http://95.138.193.252:32028/todo/', {
+    axios.post('/todo/', {
         "title": title,
         "completed": false,
         "tag": "todo",

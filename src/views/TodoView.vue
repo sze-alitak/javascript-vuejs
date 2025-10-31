@@ -2,34 +2,20 @@
 import { ref, computed, onMounted } from 'vue'
 import CreateSimple from '@/components/CreateSimple.vue'
 import List from '@/components/List.vue'
-import axios from '@/services/http'
+import useApi from '@/composables/useApi'
 
-const todos = ref([])
-
-const fetchTodos = () => {
-    axios.get('/todo/')
-    .then(res => {
-            todos.value = res.data
-    })
-    .catch(err => {
-            console.log(err)
-    })
-}
+const { data: todos, fetchData, addItem } = useApi('todo')
 
 function add(title) {
-    axios.post('/todo/', {
+    addItem({
         "title": title,
         "completed": false,
         "tag": "todo",
     })
-    .then(res => {
-        // fetchTodos()
-        todos.value.push(res.data)
-    })    
 }
 
 onMounted(() => {
-   fetchTodos()
+   fetchData()
 })
 
 const incompleteTodos = computed(() => todos.value.filter(todo => !todo.is_completed))

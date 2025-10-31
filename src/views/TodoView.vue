@@ -1,31 +1,36 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import CreateSimple from '@/components/CreateSimple.vue'
 import List from '@/components/List.vue'
+import axios from 'axios'
 
-const todos = ref([
-    {
-        "id": 1,
-        "title": "Rounting alapok",
-        "is_completed": false,
-        "tag": "routing",
-    },
-    {
-        "id": 2,
-        "title": "Axios, async/await",
-        "is_completed": false,
-        "tag": "axios",
-    },
-])
+const todos = ref([])
 
-function add(title) {
-    todos.value.push({
-        "id": todos.value.length + 1,
-        "title": title,
-        "is_completed": false,
-        "tag": "todo",
+const fetchTodos = () => {
+    axios.get('http://95.138.193.252:32028/todo/')
+    .then(res => {
+            todos.value = res.data
+    })
+    .catch(err => {
+            console.log(err)
     })
 }
+
+function add(title) {
+    axios.post('http://95.138.193.252:32028/todo/', {
+        "title": title,
+        "completed": false,
+        "tag": "todo",
+    })
+    .then(res => {
+        // fetchTodos()
+        todos.value.push(res.data)
+    })    
+}
+
+onMounted(() => {
+   fetchTodos()
+})
 
 const incompleteTodos = computed(() => todos.value.filter(todo => !todo.is_completed))
 const completeTodos = computed(() => todos.value.filter(todo => todo.is_completed))

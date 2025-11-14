@@ -3,6 +3,10 @@ import { ref, computed } from 'vue'
 import CreateSimple from '@/components/CreateSimple.vue'
 import List from '@/components/List.vue'
 
+import { useCounterStore } from '@/stores/counter'
+
+const counterStore = useCounterStore()
+
 const books = ref([
     {
         "id": 1,
@@ -50,6 +54,12 @@ const completeBooks = computed(() => books.value.filter(book => book.is_complete
 </script>
 
 <template>
+<h2>
+        Counter: {{ counterStore.count }}
+        <button @click="counterStore.increment">Increment</button>
+        <button @click="counterStore.decrement">Decrement</button>
+    </h2>
+
     <CreateSimple title="Könyv hozzáadása" v-on:add="add"/>
 
     <!-- named route -->

@@ -1,16 +1,20 @@
 import {defineStore} from 'pinia'
+import { ref } from 'vue'
 
-export const useCounterStore = defineStore('counter', {
-    state: () => ({
-        count: 0
-    }),
+export const useCounterStore = defineStore('counter',() => {
+    const count = ref(0)
 
-    actions: {
-        increment() {
-            this.count++
-        },
-        decrement() {
-            this.count--
-        },
-    },
+    const increment = () => {
+        count.value++
+    }
+
+    const decrement = () => {
+        count.value--
+    }
+
+    return {
+        count,
+        increment,
+        decrement
+    }
 })

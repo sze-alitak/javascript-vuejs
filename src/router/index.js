@@ -28,6 +28,16 @@ const router = createRouter({
       name: 'todo.edit',
       component: () => import('@/views/TodosEditView.vue')
     },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/RegisterView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/LoginView.vue')
+    },
   ],
 })
 

@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "MiniAPI",
+    "_postman_id": "c1a4df8b-1f4f-4ca6-a1d3-d03fd8f12f0d",
+    "description": "Simple Flask + SQLite API for testing (auth + CRUD)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"secret\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"secret\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "List items (GET /todo/)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/todo/",
+              "host": ["{{base_url}}"],
+              "path": ["todo", ""]
+            }
+          }
+        },
+        {
+          "name": "Create item (POST /todo/)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New todo\",\n  \"completed\": false,\n  \"tag\": \"demo\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/todo/",
+              "host": ["{{base_url}}"],
+              "path": ["todo", ""]
+            }
+          }
+        },
+        {
+          "name": "Show item (GET /todo/1)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/todo/1",
+              "host": ["{{base_url}}"],
+              "path": ["todo", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update item (PUT /todo/1)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated title\",\n  \"completed\": true,\n  \"tag\": \"changed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/todo/1",
+              "host": ["{{base_url}}"],
+              "path": ["todo", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete item (DELETE /todo/1)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/todo/1",
+              "host": ["{{base_url}}"],
+              "path": ["todo", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://95.138.193.252:32028" },
+    { "key": "token", "value": "" }
+  ]
+}

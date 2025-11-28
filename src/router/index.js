@@ -38,6 +38,21 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/LoginView.vue')
     },
+    {
+      path: '/cars',
+      name: 'cars',
+      component: () => import('@/views/cars/ListView.vue')
+    },
+    {
+      path: '/cars/add',
+      name: 'cars.add',
+      component: () => import('@/views/cars/AddView.vue')
+    },
+    {
+      path: '/cars/:id/edit',
+      name: 'cars.edit',
+      component: () => import('@/views/cars/EditView.vue')
+    },
   ],
 })
 

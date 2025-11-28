@@ -34,7 +34,7 @@ function deleteEntry(id) {
      v-model="activeTag"
      />
 
-    <ul>
+    <ul v-if="dataFiltered.length">
         <li v-for="entry in dataFiltered" :key="`entry-${entry.id}`"
          class="flex items-center">
             <RouterLink :to="`/${routePrefix}/${entry.id}/edit`" class="mr-auto">
@@ -50,4 +50,5 @@ function deleteEntry(id) {
             </button>
         </li>
     </ul>
+    <p v-else>Nem található adat</p>
 </template>

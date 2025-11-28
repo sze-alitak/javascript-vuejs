@@ -25,14 +25,14 @@ export default function useApi(type) {
             })
     }
 
-    const addItem = (item) => {
-        axios.post(`/${type}/`, item)
+    const addItem = async (item) => {
+        return axios.post(`/${type}/`, item)
             .then(res => {
                 data.value.push(res.data)
             }) 
     }
 
-    const updateItem = (item) => {
+    const updateItem = async (item) => {
         return axios.put(`/${type}/${item.id}`, item)
             .then(res => {
                 return fetchData()

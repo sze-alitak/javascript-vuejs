@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from '@/services/http'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -58,9 +58,11 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    if (token.value) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
-    }
+    onMounted(() => {
+        if (token.value) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
+        }
+    })
 
     return {
         token,

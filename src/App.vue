@@ -2,6 +2,7 @@
   <ul class="mb-20 grid grid-cols-6 gap-4">
     <li><RouterLink to="/">Home</RouterLink></li>
     <li><RouterLink to="/books">Books</RouterLink></li>
+    <li><RouterLink to="/cars">Cars</RouterLink></li>
     <li><RouterLink to="/todo">Todo</RouterLink></li>
     <li v-if="!authStore.isAuthenticated"><RouterLink to="/register">Register</RouterLink></li>
     <li v-if="!authStore.isAuthenticated"><RouterLink to="/login">Login</RouterLink></li>

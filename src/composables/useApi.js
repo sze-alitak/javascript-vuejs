@@ -6,12 +6,14 @@ export default function useApi(type) {
     const entry = ref({})
 
     const fetchData = () => {
+        console.log("get")
         axios.get(`/${type}/`)
             .then(res => {
+                console.log("get done")
                     data.value = res.data
             })
             .catch(err => {
-                    console.log(err)
+                console.log(err)
             })
     }
     
@@ -35,7 +37,8 @@ export default function useApi(type) {
     const updateItem = async (item) => {
         return axios.put(`/${type}/${item.id}`, item)
             .then(res => {
-                return fetchData()
+                // return fetchData()
+                return
             })
             .catch(err => {
                 console.log(err)
@@ -49,7 +52,7 @@ export default function useApi(type) {
 
         axios.delete(`/${type}/${id}`)
             .then(() => {
-                fetchData()
+                // fetchData()
             })
             .catch(err => {
                 console.log(err)

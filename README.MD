@@ -13,6 +13,7 @@
 ## Mintafeladatok vizsgához
 
 ## Általános prezentáció
+[Általános prezentáció](https://github.com/sze-alitak/javascript-vuejs/blob/main/GKNB_INTM130_Javascript_kurzusbemutato.pdf)
 
 ## Discord server
 [Computer Science & Engineering](https://discord.gg/sbbQ4KMzp7)

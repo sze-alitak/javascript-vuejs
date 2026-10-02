@@ -4,6 +4,7 @@
 * **Kukel Attila**
 
 ## Félévek
+* [2026 ősz](https://github.com/sze-alitak/javascript-vuejs/tree/2026)
 * [2025 ősz](https://github.com/sze-alitak/javascript-vuejs/tree/2025)
 
 ## Tematika

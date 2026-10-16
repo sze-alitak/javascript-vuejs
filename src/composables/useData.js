@@ -1,7 +1,11 @@
 import { ref, computed } from 'vue'
 
 export function useData() {
-    let data = ref([])
+    let data = ref([
+        {id: 1, title: 'Task manager alapok', 'is_completed': false},
+        {id: 2, title: 'Task listázás', 'is_completed': true},
+        {id: 3, title: 'Task létrehozás', 'is_completed': false},
+    ])
 
     let newEntryId = data.value.length + 1
     let selectedFilter = ref('all')

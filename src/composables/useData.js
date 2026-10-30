@@ -1,15 +1,38 @@
 import { ref, computed } from 'vue'
+import { api } from '../services/api'
+let data = ref([])
+let newEntryId
+let selectedFilter = ref('all')
+let loading = ref(false)
+let error = ref('')
 
 export function useData() {
-    let data = ref([
-        {id: 1, title: 'Task manager alapok', 'is_completed': false},
-        {id: 2, title: 'Task listázás', 'is_completed': true},
-        {id: 3, title: 'Task létrehozás', 'is_completed': false},
-    ])
+    async function loadData() {
+        loading.value = true
+        error.value = ''
+        try {
+            data.value = await api.list()
+        } catch {
+            error.value = 'Nem sikerült betölteni az adatokat!'
+        } finally {
+            loading.value = false
+        }
+    }
 
-    let newEntryId = data.value.length + 1
-    let selectedFilter = ref('all')
+    async function loadEntry(id) {
+        loading.value = true
+        error.value = ''
+        try {
+            return await api.get(id)
+        } catch {
+            error.value = 'Nem sikerült betölteni az adatokat!'
+        } finally {
+            loading.value = false
+        }
+    }
 
+    newEntryId = data.value.length + 1
+    
     let filteredData = computed(() =>
         data.value.filter(
             (entry) => 
@@ -18,12 +41,11 @@ export function useData() {
         )
     )
 
-    function add(entry) {
-        entry.value.push({
-            id: newEntryId++,
-            title: entry.entry_name,
-            is_completed: false,
+    async function add(entry) {
+        await api.store({
+            title: entry.task_name,
         })
+        loadData()
     }
 
     let remove = (id) => {
@@ -35,5 +57,5 @@ export function useData() {
         entry.is_completed = !entry.is_completed
     }
 
-    return {data, filteredData, selectedFilter, add, remove, toggle}
+    return {data, filteredData, loading, error, selectedFilter, loadData, add, remove, toggle, loadEntry}
 }

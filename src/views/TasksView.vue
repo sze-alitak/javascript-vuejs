@@ -3,24 +3,27 @@ import TaskForm from '../components/TaskForm.vue'
 import TaskFilter from '../components/TaskFilter.vue'
 import TaskList from '../components/TaskList.vue'
 
-import { useData } from '../composables/useData.js'
+import { useTasksStore } from '@/stores/tasks'
+const tasksStore = useTasksStore()
+
 import { onMounted } from 'vue'
 
-const {loadData, filteredData, loading, error,  selectedFilter,  add,  remove,  toggle} = useData()
-onMounted(loadData)
+onMounted(async () => {
+  await tasksStore.loadData()
+})
 </script>
 
 <template>
-  <p v-if="loading">Betöltés…</p>
-  <p v-else-if="error">{{ error }}</p>
+  <p v-if="tasksStore.loading">Betöltés…</p>
+  <p v-else-if="tasksStore.error">{{ tasksStore.error }}</p>
 
-  <TaskForm v-on:task-submit="add"></TaskForm>
+  <TaskForm v-on:task-submit="tasksStore.add({title: $event.task_name})"></TaskForm>
 
-  <TaskFilter v-model="selectedFilter"></TaskFilter>
+  <TaskFilter v-model="tasksStore.selectedFilter"></TaskFilter>
 
   <TaskList
-  :filteredTasks="filteredData"
-  v-on:toggle="toggle"
-  v-on:remove="remove"
+  :filteredTasks="tasksStore.filteredData"
+  v-on:toggle="tasksStore.toggle"
+  v-on:remove="tasksStore.remove"
   ></TaskList>
 </template>

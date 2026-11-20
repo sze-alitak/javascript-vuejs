@@ -1,20 +1,20 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useData } from '@/composables/useData'
+
+import { useTasksStore } from '@/stores/tasks'
 
 const route = useRoute()
 
-const {loadEntry} = useData()
+const tasksStore = useTasksStore()
 
-const task = ref()
 
 onMounted(async () => {
-    task.value = await loadEntry(route.params.id)
+    tasksStore.loadData()
 })
 
 </script>
 
 <template>
-{{ task }}
+<!-- {{ task }} -->
 </template>

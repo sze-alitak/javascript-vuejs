@@ -1,17 +1,16 @@
 import { ref, computed } from 'vue'
-import { api } from '../services/api'
-let data = ref([])
-let newEntryId
-let selectedFilter = ref('all')
-let loading = ref(false)
-let error = ref('')
 
-export function useData() {
+export function useData(api) {
+    let data = ref([])
+    let selectedFilter = ref('all')
+    let loading = ref(false)
+    let error = ref('')
+
     async function loadData() {
         loading.value = true
         error.value = ''
         try {
-            data.value = await api.list()
+            return await api.list()
         } catch {
             error.value = 'Nem sikerült betölteni az adatokat!'
         } finally {
@@ -31,20 +30,16 @@ export function useData() {
         }
     }
 
-    newEntryId = data.value.length + 1
-    
     let filteredData = computed(() =>
         data.value.filter(
-            (entry) => 
+            (entry) =>
             (selectedFilter.value == 'all') ||
             (selectedFilter.value == 'completed' ? entry.is_completed : !entry.is_completed)
         )
     )
 
     async function add(entry) {
-        await api.store({
-            title: entry.task_name,
-        })
+        await api.store(entry)
         loadData()
     }
 

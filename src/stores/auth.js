@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { authApi } from '@/services/api'
-
 
 export const useAuthStore = defineStore('auth', () => {
     const user = ref(null)
+    const isAuthenticated = computed(() => !!user.value)
 
     const login = async (username, password) => {
+        if (user.value !== null) {
+            return
+        }
+
         const data = await authApi().login(username, password)
         user.value = data
     }
@@ -16,7 +20,9 @@ export const useAuthStore = defineStore('auth', () => {
         
         await authApi().logout(user.value.token)
         user.value = null
+
+
     }
 
-    return {user, login, logout}
+    return {user, isAuthenticated, login, logout}
 })

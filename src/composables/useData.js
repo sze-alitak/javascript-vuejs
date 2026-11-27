@@ -10,7 +10,9 @@ export function useData(api) {
         loading.value = true
         error.value = ''
         try {
-            return await api.list()
+            const dataList = await api.list()
+            data.value = dataList
+            return dataList
         } catch {
             error.value = 'Nem sikerült betölteni az adatokat!'
         } finally {

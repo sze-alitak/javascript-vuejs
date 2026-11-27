@@ -61,7 +61,6 @@ export function authApi(){
             // }
             // const response = await request(`${resourceUrl}/login`, 'POST', credentials)
             // return response.json()  
-                      console.log("api login")
             return (await request(`${resourceUrl}/login`, 'POST', {"username": username, "password": password})).json()            
         },
 
@@ -70,7 +69,6 @@ export function authApi(){
         },
 
         async logout(token) {
-            console.log(token)
             await request(`${resourceUrl}/logout`, 'POST', undefined, token )
         }
     }
